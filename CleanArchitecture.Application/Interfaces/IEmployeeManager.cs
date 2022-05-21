@@ -10,4 +10,5 @@ namespace CleanArchitecture.Application.Interfaces;
 public interface IEmployeeManager
 {
     Task<IReadOnlyList<Employee>> GetEmployee();
+    Task<Employee> AddEmployee(Employee employee);
 }

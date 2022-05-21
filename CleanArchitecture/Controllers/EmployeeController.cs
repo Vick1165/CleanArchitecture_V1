@@ -22,4 +22,12 @@ public class EmployeeController : Controller
     {
         return await _employeeManager.GetEmployee();
     }
+
+
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<Employee> AddEmployee(Employee employee)
+    {
+        return await _employeeManager.AddEmployee(employee);
+    }
 }

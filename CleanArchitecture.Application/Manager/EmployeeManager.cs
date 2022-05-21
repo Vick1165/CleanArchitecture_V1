@@ -22,4 +22,9 @@ public class EmployeeManager : IEmployeeManager
     {
         return await _employeeRepository.GetAllAsync();
     }
+
+    public async Task<Employee> AddEmployee( Employee employee)
+    {
+        return await _employeeRepository.AddAsync(employee);
+    }
 }
