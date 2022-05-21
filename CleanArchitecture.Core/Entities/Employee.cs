@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CleanArchitecture.Core.Entities;
 
+[Table("Employees")]
 public class Employee
 {
     [Key]
