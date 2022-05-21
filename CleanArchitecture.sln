@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Core", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Infrastructure", "CleanArchitecture.Infrastructure\CleanArchitecture.Infrastructure.csproj", "{D87D2768-4076-4CCD-8BD3-D23EA4EC0EBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitecture.Application", "CleanArchitecture.Application\CleanArchitecture.Application.csproj", "{E12D949E-6167-4001-A159-71F57E69CF48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D87D2768-4076-4CCD-8BD3-D23EA4EC0EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D87D2768-4076-4CCD-8BD3-D23EA4EC0EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D87D2768-4076-4CCD-8BD3-D23EA4EC0EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E12D949E-6167-4001-A159-71F57E69CF48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E12D949E-6167-4001-A159-71F57E69CF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E12D949E-6167-4001-A159-71F57E69CF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E12D949E-6167-4001-A159-71F57E69CF48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
