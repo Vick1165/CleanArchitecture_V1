@@ -43,4 +43,10 @@ public class Employee
         get;
         set;
     }
+
+    public string Email2
+    {
+        get;
+        set;
+    }
 }

@@ -1,5 +1,6 @@
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Manager;
+using CleanArchitecture.Application.Mapper;
 using CleanArchitecture.Core.Repositories;
 using CleanArchitecture.Core.Repositories.Base;
 using CleanArchitecture.Infrastructure.Data;
@@ -22,6 +23,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IEmployeeManager, EmployeeManager>();
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+
+//Add Auto mapper
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var app = builder.Build();
 

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CleanArchitecture.Core.Entities;
-using CleanArchitecture.Core.Repositories.Base;
+﻿using CleanArchitecture.Core.Repositories.Base;
 using CleanArchitecture.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Infrastructure.Repositories.Base;
 
 public class Repository<T> : IRepository<T> where T : class
- {
+{
     private readonly EmployeeContext _context;
 
     public Repository(EmployeeContext context)
@@ -36,10 +30,12 @@ public class Repository<T> : IRepository<T> where T : class
     {
         return await _context.Set<T>().ToListAsync();
     }
+
     public async Task<T> GetByIdAsync(int id)
     {
-        return await _context.Set<T>().FindAsync(id);
+        return await _context.Set<T>().FindAsync((long)id);
     }
+
     public async Task UpdateAsync(T entity)
     {
         _context.Set<T>().Update(entity);
