@@ -17,9 +17,10 @@ public class EmployeeController : Controller
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IReadOnlyList<EmployeeModel>> Get()
+    public async Task<IActionResult> Get()
     {
-        return await _employeeManager.GetEmployee();
+        var result = await _employeeManager.GetEmployee();
+        return new OkObjectResult(result);
     }
 
     [HttpGet("id")]

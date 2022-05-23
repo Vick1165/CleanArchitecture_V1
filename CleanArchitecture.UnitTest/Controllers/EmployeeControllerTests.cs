@@ -2,6 +2,8 @@
 using CleanArchitecture.Application.DTO;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Controllers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -42,10 +44,13 @@ namespace CleanArchitecture.UnitTest.Controllers
             mockEmployeeManager.Setup(a => a.GetEmployee()).ReturnsAsync(data);
             // Act
             var result = await employeeController.Get();
+            var okResult = result as OkObjectResult;
+            var result1 = okResult.Value;
 
             // Assert
-            Assert.That(result, Is.EqualTo(data));
-            this.mockRepository.VerifyAll();
+            Assert.IsNotNull(okResult);
+            Assert.AreEqual(data, result1);
+            Assert.AreEqual(StatusCodes.Status200OK, okResult.StatusCode);
         }
 
         [Test]
