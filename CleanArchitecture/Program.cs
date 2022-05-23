@@ -1,3 +1,4 @@
+using CleanArchitecture.Application.Expections.CustomExceptionMiddleware;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Logger;
 using CleanArchitecture.Application.Manager;
@@ -35,6 +36,8 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
