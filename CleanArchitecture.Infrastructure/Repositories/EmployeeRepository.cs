@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CleanArchitecture.Core.Entities;
+﻿using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Repositories;
 using CleanArchitecture.Infrastructure.Data;
 using CleanArchitecture.Infrastructure.Repositories.Base;
@@ -24,6 +19,4 @@ public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
     {
         return await _context.Employees.Where(m => m.LastName == lastname).ToListAsync();
     }
-
-
 }
