@@ -17,6 +17,10 @@ namespace CleanArchitecture.Core.Entities
 
     }
 
+    public enum DepartmentType
+    {
+        HR,IT,SE
+    }
 
 
 }

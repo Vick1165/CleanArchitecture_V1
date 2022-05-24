@@ -11,10 +11,10 @@ namespace CleanArchitecture.Application.Mapper
             CreateMap<Employee, EmployeeModel>().ForMember(
                 a => a.Id,
                 b => b.MapFrom(c => c.EmployeeId))
+                //.ForMember(
+                //    a => a.DepartmentType,
+                //    b => b.MapFrom(c=> c.DepartmentId))
                .ReverseMap();
-
-
-
 
         }
     }

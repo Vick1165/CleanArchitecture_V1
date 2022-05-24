@@ -19,7 +19,7 @@ public class EmployeeManager : IEmployeeManager
 
     public async Task<IReadOnlyList<EmployeeModel>> GetEmployee()
     {
-        var employeeList = await _employeeRepository.GetAllAsync();
+        var employeeList = await _employeeRepository.GetAllEmployeeWithDepartment();
         var result = _mapper.Map<IReadOnlyList<EmployeeModel>>(employeeList);
         return result;
     }

@@ -50,5 +50,9 @@ public class Employee
         set;
     }
 
-    public Departments Department { get; set; }
+
+    public int DepartmentId { get; set; }
+
+    [ForeignKey(nameof(DepartmentId))]
+    public virtual Departments departments { get; set; }
 }

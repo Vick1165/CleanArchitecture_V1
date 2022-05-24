@@ -16,16 +16,16 @@ public class EmployeeContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         var i = 0;
-        // Seed database with all Colors
-        foreach (var s in "HR,IT,Accounts".Split(","))
+        // Seed database with all Department Type
+        foreach (DepartmentType departmentType in Enum.GetValues(typeof(DepartmentType)).Cast<DepartmentType>())
         {
-            Departments colorDto = new Departments
+            Departments departments = new Departments
             {
                 Id = ++i,
-                Department = s,
+                Department = departmentType.ToString(),
             };
 
-            modelBuilder.Entity<Departments>().HasData(colorDto);
+            modelBuilder.Entity<Departments>().HasData(departments);
         }
     }
 }
