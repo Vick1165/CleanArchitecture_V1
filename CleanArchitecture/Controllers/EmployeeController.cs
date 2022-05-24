@@ -10,12 +10,10 @@ namespace CleanArchitecture.Controllers;
 public class EmployeeController : Controller
 {
     private readonly IEmployeeManager _employeeManager;
-    private readonly ILoggerManager _logger;
 
-    public EmployeeController(IEmployeeManager employeeManager, ILoggerManager logger)
+    public EmployeeController(IEmployeeManager employeeManager)
     {
         _employeeManager = employeeManager;
-        _logger = logger;
     }
 
     [HttpGet]
