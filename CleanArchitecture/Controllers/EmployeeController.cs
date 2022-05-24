@@ -22,6 +22,7 @@ public class EmployeeController : Controller
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> Get()
     {
+        throw new Exception();
         var result = await _employeeManager.GetEmployee();
         return new OkObjectResult(result);
     }
