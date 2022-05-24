@@ -49,4 +49,6 @@ public class Employee
         get;
         set;
     }
+
+    public Departments Department { get; set; }
 }

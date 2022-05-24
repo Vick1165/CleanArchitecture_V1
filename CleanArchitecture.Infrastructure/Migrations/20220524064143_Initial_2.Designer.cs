@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitecture.Infrastructure.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    [Migration("20220523155742_int_v1")]
-    partial class int_v1
+    [Migration("20220524064143_Initial_2")]
+    partial class Initial_2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,49 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("CleanArchitecture.Core.Entities.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("department")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            department = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            department = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            department = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            department = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            department = 4
+                        });
+                });
 
             modelBuilder.Entity("CleanArchitecture.Core.Entities.Employee", b =>
                 {
@@ -34,6 +77,9 @@ namespace CleanArchitecture.Infrastructure.Migrations
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -57,7 +103,20 @@ namespace CleanArchitecture.Infrastructure.Migrations
 
                     b.HasKey("EmployeeId");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Core.Entities.Employee", b =>
+                {
+                    b.HasOne("CleanArchitecture.Core.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
                 });
 #pragma warning restore 612, 618
         }

@@ -40,6 +40,7 @@ public class EmployeeManager : IEmployeeManager
 
     public async Task<EmployeeModel> AddEmployee(EmployeeModel employeeModel)
     {
+
         var employee = _mapper.Map<Employee>(employeeModel);
         var result = await _employeeRepository.AddAsync(employee);
         var mappedResult = _mapper.Map<EmployeeModel>(result);
