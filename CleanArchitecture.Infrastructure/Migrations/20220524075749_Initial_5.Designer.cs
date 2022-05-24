@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitecture.Infrastructure.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    [Migration("20220523044400_ini")]
-    partial class ini
+    [Migration("20220524075749_Initial_5")]
+    partial class Initial_5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,40 @@ namespace CleanArchitecture.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("CleanArchitecture.Core.Entities.Departments", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Department")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Department = "HR"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Department = "IT"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Department = "Accounts"
+                        });
+                });
 
             modelBuilder.Entity("CleanArchitecture.Core.Entities.Employee", b =>
                 {
@@ -35,7 +69,14 @@ namespace CleanArchitecture.Infrastructure.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email2")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -53,7 +94,20 @@ namespace CleanArchitecture.Infrastructure.Migrations
 
                     b.HasKey("EmployeeId");
 
+                    b.HasIndex("DepartmentId");
+
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("CleanArchitecture.Core.Entities.Employee", b =>
+                {
+                    b.HasOne("CleanArchitecture.Core.Entities.Departments", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
                 });
 #pragma warning restore 612, 618
         }

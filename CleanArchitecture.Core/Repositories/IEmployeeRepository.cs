@@ -6,4 +6,5 @@ namespace CleanArchitecture.Core.Repositories;
 public interface IEmployeeRepository : IRepository<Employee>
 {
     Task<IEnumerable<Employee>> GetEmployeeByLastName(string lastname);
+    Task<IEnumerable<Employee>> GetAllEmployeeWithDepartment();
 }

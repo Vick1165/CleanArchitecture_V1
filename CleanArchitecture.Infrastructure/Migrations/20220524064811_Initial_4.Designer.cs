@@ -4,6 +4,7 @@ using CleanArchitecture.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitecture.Infrastructure.Migrations
 {
     [DbContext(typeof(EmployeeContext))]
-    partial class EmployeeContextModelSnapshot : ModelSnapshot
+    [Migration("20220524064811_Initial_4")]
+    partial class Initial_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,12 +49,22 @@ namespace CleanArchitecture.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            Department = "IT"
+                            Department = "SE"
                         },
                         new
                         {
                             Id = 3,
+                            Department = "IT"
+                        },
+                        new
+                        {
+                            Id = 4,
                             Department = "Accounts"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Department = "Staff"
                         });
                 });
 

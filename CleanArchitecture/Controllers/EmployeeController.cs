@@ -1,5 +1,6 @@
 ﻿using CleanArchitecture.Application.DTO;
 using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Logger;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Controllers;
@@ -9,17 +10,20 @@ namespace CleanArchitecture.Controllers;
 public class EmployeeController : Controller
 {
     private readonly IEmployeeManager _employeeManager;
+    private readonly ILoggerManager _logger;
 
-    public EmployeeController(IEmployeeManager employeeManager)
+    public EmployeeController(IEmployeeManager employeeManager, ILoggerManager logger)
     {
         _employeeManager = employeeManager;
+        _logger = logger;
     }
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IReadOnlyList<EmployeeModel>> Get()
+    public async Task<IActionResult> Get()
     {
-        return await _employeeManager.GetEmployee();
+        var result = await _employeeManager.GetEmployee();
+        return new OkObjectResult(result);
     }
 
     [HttpGet("id")]

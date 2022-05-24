@@ -1,7 +1,12 @@
-﻿namespace CleanArchitecture.Application.DTO
+﻿using CleanArchitecture.Core.Entities;
+
+namespace CleanArchitecture.Application.DTO
+
+
 {
     public class EmployeeModel
     {
+
         public Int64 Id
         {
             get;
@@ -43,5 +48,7 @@
             get;
             set;
         }
+
+        public Departments Departments { get; set; }
     }
 }
