@@ -39,7 +39,7 @@ namespace CleanArchitecture.UnitTest.Controllers
         public async Task Get_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var data = fixture.Create<IReadOnlyList<EmployeeModel>>();
+            var data = fixture.Create<IReadOnlyList<EmployeeResponseModel>>();
             var employeeController = this.CreateEmployeeController();
             mockEmployeeManager.Setup(a => a.GetEmployee()).ReturnsAsync(data);
             // Act
@@ -90,7 +90,7 @@ namespace CleanArchitecture.UnitTest.Controllers
         {
             // Arrange
             var employeeController = this.CreateEmployeeController();
-            EmployeeModel employee = null;
+            EmployeeRequestModel employee = null;
 
             // Act
             var result = await employeeController.AddEmployee(
@@ -106,7 +106,7 @@ namespace CleanArchitecture.UnitTest.Controllers
         {
             // Arrange
             var employeeController = this.CreateEmployeeController();
-            EmployeeModel employee = null;
+            EmployeeRequestModel employee = null;
 
             // Act
             await employeeController.UpdateEmployee(
@@ -122,7 +122,7 @@ namespace CleanArchitecture.UnitTest.Controllers
         {
             // Arrange
             var employeeController = this.CreateEmployeeController();
-            EmployeeModel employee = null;
+            EmployeeRequestModel employee = null;
 
             // Act
             await employeeController.DeleteEmployee(

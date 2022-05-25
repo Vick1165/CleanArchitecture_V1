@@ -24,4 +24,5 @@ public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
     {
         return await _context.Employees.Include(m=>m.departments).ToListAsync();
     }
+
 }

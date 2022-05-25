@@ -4,11 +4,11 @@ namespace CleanArchitecture.Application.Interfaces;
 
 public interface IEmployeeManager
 {
-    Task<IReadOnlyList<EmployeeModel>> GetEmployee();
+    Task<IReadOnlyList<EmployeeResponseModel>> GetEmployee();
 
-    Task<EmployeeModel> AddEmployee(EmployeeModel employee);
-    Task UpdateEmployee(EmployeeModel employeeModel);
-    Task<EmployeeModel> GetEmployeebyId(int id);
-    Task DeleteEmployee(EmployeeModel employeeModel);
-    Task<IEnumerable<EmployeeModel>> GetEmployeebyLastName(string lastname);
+    Task<EmployeeResponseModel> AddEmployee(EmployeeRequestModel employee);
+    Task UpdateEmployee(EmployeeRequestModel employeeModel);
+    Task<EmployeeRequestModel> GetEmployeebyId(int id);
+    Task DeleteEmployee(EmployeeRequestModel employeeModel);
+    Task<IEnumerable<EmployeeRequestModel>> GetEmployeebyLastName(string lastname);
 }

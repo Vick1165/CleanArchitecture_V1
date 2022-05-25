@@ -26,14 +26,14 @@ public class EmployeeController : Controller
 
     [HttpGet("id")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<EmployeeModel> GetbyId(int id)
+    public async Task<EmployeeRequestModel> GetbyId(int id)
     {
         return await _employeeManager.GetEmployeebyId(id);
     }
 
     [HttpGet("lastName")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IEnumerable<EmployeeModel>> GetbyLastName(string lastName)
+    public async Task<IEnumerable<EmployeeRequestModel>> GetbyLastName(string lastName)
     {
         return await _employeeManager.GetEmployeebyLastName(lastName);
     }
@@ -41,21 +41,21 @@ public class EmployeeController : Controller
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<EmployeeModel> AddEmployee(EmployeeModel employee)
+    public async Task<IActionResult> AddEmployee(EmployeeRequestModel employee)
     {
-        return await _employeeManager.AddEmployee(employee);
+        return new OkObjectResult(await _employeeManager.AddEmployee(employee));
     }
 
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task UpdateEmployee(EmployeeModel employee)
+    public async Task UpdateEmployee(EmployeeRequestModel employee)
     {
         await _employeeManager.UpdateEmployee(employee);
     }
 
     [HttpDelete]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task DeleteEmployee(EmployeeModel employee)
+    public async Task DeleteEmployee(EmployeeRequestModel employee)
     {
         await _employeeManager.DeleteEmployee(employee);
     }

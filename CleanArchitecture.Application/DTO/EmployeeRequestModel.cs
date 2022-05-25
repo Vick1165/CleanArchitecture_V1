@@ -4,15 +4,8 @@ namespace CleanArchitecture.Application.DTO
 
 
 {
-    public class EmployeeModel
+    public class EmployeeRequestModel
     {
-
-        public Int64 Id
-        {
-            get;
-            set;
-        }
-
         public string FirstName
         {
             get;
@@ -49,6 +42,7 @@ namespace CleanArchitecture.Application.DTO
             set;
         }
 
-        public Departments Departments { get; set; }
+        public int DepartmentId { get; set; }
+
     }
 }

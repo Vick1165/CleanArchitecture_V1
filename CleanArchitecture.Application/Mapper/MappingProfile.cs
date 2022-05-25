@@ -8,12 +8,16 @@ namespace CleanArchitecture.Application.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<Employee, EmployeeModel>().ForMember(
-                a => a.Id,
-                b => b.MapFrom(c => c.EmployeeId))
-                //.ForMember(
-                //    a => a.DepartmentType,
-                //    b => b.MapFrom(c=> c.DepartmentId))
+            CreateMap<Employee, EmployeeResponseModel>()
+                .ForMember(
+                    a =>a.Id,
+                    b =>b.MapFrom(c => c.EmployeeId))
+                .ReverseMap();
+
+
+            CreateMap<Employee, EmployeeRequestModel>().ForMember(
+                   a => a.DepartmentId,
+                   b => b.MapFrom(c => c.DepartmentId))
                .ReverseMap();
 
         }
