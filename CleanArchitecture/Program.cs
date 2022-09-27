@@ -1,6 +1,4 @@
-using CleanArchitecture.Application.Interfaces;
-using CleanArchitecture.Application.Manager;
-using CleanArchitecture.Application.Mapper;
+
 using CleanArchitecture.Core.Repositories;
 using CleanArchitecture.Core.Repositories.Base;
 using CleanArchitecture.Infrastructure.Data;
@@ -14,18 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<EmployeeContext>(options => options.UseSqlServer(connectionString));
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddDbContext<ApiContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //register service
-builder.Services.AddTransient<IEmployeeManager, EmployeeManager>();
-builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
-//Add Auto mapper
-builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+
 
 var app = builder.Build();
 
