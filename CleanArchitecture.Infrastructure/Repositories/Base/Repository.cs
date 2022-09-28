@@ -42,13 +42,11 @@ public class Repository<T> : IRepository<T> where T : class
 
     public async Task UpdateAsync(int id, T entity)
     {
-
         T existing = _context.Set<T>().Find(id);
         if (existing != null)
         {
             _context.Entry(existing).CurrentValues.SetValues(entity);
             _context.SaveChanges();
         }
-
     }
 }

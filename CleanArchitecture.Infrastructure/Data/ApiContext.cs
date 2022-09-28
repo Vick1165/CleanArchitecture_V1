@@ -1,5 +1,4 @@
-﻿
-using CleanArchitecture.Core.Entities;
+﻿using CleanArchitecture.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Infrastructure.Data;
@@ -11,5 +10,4 @@ public class ApiContext : DbContext
     }
 
     public DbSet<Employee> Employee { get; set; }
-
 }

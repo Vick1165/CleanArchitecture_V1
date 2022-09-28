@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  cleanarchitecture:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionStrings_DefaultConnection=Database=cx_tech;Server=host.docker.internal;Port=3306;Uid=cx_tech;Pwd=cx_tech;SslMode=none
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
