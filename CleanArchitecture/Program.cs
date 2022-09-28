@@ -12,7 +12,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApiContext>(options => options.UseSqlServer(connectionString));
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
+builder.Services.AddDbContext<ApiContext>(
+           dbContextOptions => dbContextOptions
+               .UseMySql(connectionString, serverVersion)
+               // The following three options help with debugging, but should
+               // be changed or removed for production.
+               .LogTo(Console.WriteLine, LogLevel.Information)
+               .EnableSensitiveDataLogging()
+               .EnableDetailedErrors());
+//builder.Services.AddDbContext<ApiContext>(options => options.UseMySQL(connectionString));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
