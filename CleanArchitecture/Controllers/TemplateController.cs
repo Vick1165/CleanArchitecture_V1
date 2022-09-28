@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CleanArchitecture.Application.DTO;
+using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class TemplateController : Controller
+[Authorize]
+public class TemplateController : BaseController<EmployeeDto, Employee>
 {
-
-
-
+    public TemplateController(IBaseManager<EmployeeDto, Employee> baseManager) : base(baseManager)
+    {
+    }
 }

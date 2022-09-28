@@ -1,10 +1,12 @@
-
-using CleanArchitecture.Core.Repositories;
+using CleanArchitecture.Application.Interfaces;
+using CleanArchitecture.Application.Manager;
+using CleanArchitecture.Application.Mapper;
 using CleanArchitecture.Core.Repositories.Base;
 using CleanArchitecture.Infrastructure.Data;
-using CleanArchitecture.Infrastructure.Repositories;
 using CleanArchitecture.Infrastructure.Repositories.Base;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,15 +23,51 @@ builder.Services.AddDbContext<ApiContext>(
                .LogTo(Console.WriteLine, LogLevel.Information)
                .EnableSensitiveDataLogging()
                .EnableDetailedErrors());
-//builder.Services.AddDbContext<ApiContext>(options => options.UseMySQL(connectionString));
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+                {
+                    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+
+                    c.AddSecurityDefinition("Bearer",
+                    new OpenApiSecurityScheme
+                    {
+                        In = ParameterLocation.Header,
+                        Description =
+                            "Enter JWT in format: Bearer {token}",
+                        Name = "Authorization",
+                        Type = SecuritySchemeType.ApiKey
+                    });
+                });
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.Authority = "https://dev-8wpu81nz.us.auth0.com/";
+    options.Audience = "secondAPI";
+});
 
 //register service
+builder.Services.AddTransient(typeof(IBaseManager<,>), typeof(BaseManager<,>));
+builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
-
-
-
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -41,6 +79,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
