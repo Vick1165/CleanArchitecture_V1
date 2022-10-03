@@ -68,14 +68,14 @@ builder.Services.AddTransient(typeof(IBaseManager<,>), typeof(BaseManager<,>));
 builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-var app = builder.Build();
 
+var app = builder.Build();
+app.MapGet("", k => k.Response.WriteAsJsonAsync("test"));
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 
