@@ -6,3 +6,6 @@ services:
     build:
       context: .
       dockerfile: CleanArchitecture/Dockerfile
+    deploy:
+      mode: replicated
+      replicas: 6

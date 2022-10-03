@@ -3,7 +3,7 @@ version: '3.4'
 services:
   cleanarchitecture:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Docker
       - ASPNETCORE_URLS=https://+:443;http://+:80
       - ConnectionStrings_DefaultConnection=Database=cx_tech;Server=host.docker.internal;Port=3306;Uid=cx_tech;Pwd=cx_tech;SslMode=none
     ports:
@@ -12,3 +12,6 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    
